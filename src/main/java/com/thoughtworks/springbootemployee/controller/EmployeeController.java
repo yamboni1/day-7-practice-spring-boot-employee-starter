@@ -25,8 +25,9 @@ public class EmployeeController {
         return employeeRepository.findByGender(gender);
     }
 
-    @PostMapping(path = "/employees")
+    @PostMapping
     public Employee addEmployee(@RequestBody Employee employee){
+
         return employeeRepository.addEmployee(employee);
     }
 }

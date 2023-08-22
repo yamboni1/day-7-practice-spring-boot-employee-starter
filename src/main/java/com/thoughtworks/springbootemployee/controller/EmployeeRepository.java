@@ -33,14 +33,18 @@ public class EmployeeRepository {
                 .collect(Collectors.toList());
     }
 
-//    public Employee addEmployee(Employee employee) {
-//        return employee.add(new Employee(generateId(), "Bob", 35, "Male", 60000));
-//    }
+    public Employee addEmployee(Employee employee) {
+        Long generatedId = generateId();
+        Employee toBeAddedEmployee = new Employee(generatedId, employee.getName(), employee.getAge(), employee.getGender(), employee.getSalary());
+        employees.add(toBeAddedEmployee);
+        return toBeAddedEmployee;
 
-    public long generateId(){
-        Employee employee1 = employees.stream()
-                .max(Comparator.comparingLong(employee -> employee.getId()))
-                .orElseThrow(EmployeeNotFoundException::new);
-        return employee1.getId()+1;
+    }
+
+    public Long generateId() {
+        return employees.stream()
+                .mapToLong(Employee::getId)
+                .max()
+                .orElse(0L) + 1;
     }
 }

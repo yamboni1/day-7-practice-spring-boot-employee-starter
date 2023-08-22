@@ -1,7 +1,7 @@
 package com.thoughtworks.springbootemployee.model;
 
 public class Company {
-    private Long id;
+    private final Long id;
     private String name;
 
     public Company(Long id, String name) {

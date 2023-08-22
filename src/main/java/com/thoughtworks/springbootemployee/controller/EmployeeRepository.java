@@ -11,10 +11,11 @@ public class EmployeeRepository {
     private static final List<Employee> employees = new ArrayList<>();
 
     static {
-        employees.add(new Employee(1, "Daphne", 23, "Female", 1000));
-        employees.add(new Employee(2, "Red", 25, "Male", 1500));
-        employees.add(new Employee(3L, "Sandra", 66, "Female", 788));
-        employees.add(new Employee(4L, "Sam", 34, "Male", 4566));
+        employees.add(new Employee(1L, "Daphne", 23, "Female", 1000, 1));
+        employees.add(new Employee(2L, "Red", 25, "Male", 1500, 1));
+        employees.add(new Employee(3L, "Sandra", 66, "Female", 788, 2));
+        employees.add(new Employee(4L, "Sam", 34, "Male", 4566, 3));
+        employees.add(new Employee(5L, "Jane", 46, "Female", 5555, 4));
     }
 
     public List<Employee> listAll() {
@@ -36,7 +37,7 @@ public class EmployeeRepository {
 
     public Employee addEmployee(Employee employee) {
         Long generatedId = generateId();
-        Employee toBeAddedEmployee = new Employee(generatedId, employee.getName(), employee.getAge(), employee.getGender(), employee.getSalary());
+        Employee toBeAddedEmployee = new Employee(generatedId, employee.getName(), employee.getAge(), employee.getGender(), employee.getSalary(),employee.getCompanyId());
         employees.add(toBeAddedEmployee);
         return toBeAddedEmployee;
 
@@ -57,6 +58,12 @@ public class EmployeeRepository {
         return employees.stream()
                 .skip((pageNumber -1)* pageSize)
                 .limit(pageSize)
+                .collect(Collectors.toList());
+    }
+
+    public List<Employee> findByCompanyId(Long employeesCompanyId) {
+        return employees.stream()
+                .filter(employee -> employee.getCompanyId() == employeesCompanyId)
                 .collect(Collectors.toList());
     }
 }

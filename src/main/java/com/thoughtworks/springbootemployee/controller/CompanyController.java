@@ -11,9 +11,11 @@ import java.util.List;
 public class CompanyController {
 
     private final CompanyRepository companyRepository;
+    private final EmployeeRepository employeeRepository;
     @Autowired
-    public CompanyController(CompanyRepository companyRepository) {
+    public CompanyController(CompanyRepository companyRepository, EmployeeRepository employeeRepository) {
         this.companyRepository = companyRepository;
+        this.employeeRepository = employeeRepository;
     }
     @GetMapping
     public List<Company> listAllCompanies(){
@@ -22,5 +24,9 @@ public class CompanyController {
     @GetMapping("/{id}")
     public Company findById(@PathVariable Long id){
         return companyRepository.findById(id);
+    }
+    @GetMapping("/{employeesCompanyId}/employees")
+    public List<Employee> getEmployeesWithCompanyId(@PathVariable Long employeesCompanyId){
+        return employeeRepository.findByCompanyId(employeesCompanyId);
     }
 }

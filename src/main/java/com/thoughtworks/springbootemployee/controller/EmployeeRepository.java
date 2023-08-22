@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.controller;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,5 +31,16 @@ public class EmployeeRepository {
         return employees.stream()
                 .filter(employee -> employee.getGender().equals(gender))
                 .collect(Collectors.toList());
+    }
+
+//    public Employee addEmployee(Employee employee) {
+//        return employee.add(new Employee(generateId(), "Bob", 35, "Male", 60000));
+//    }
+
+    public long generateId(){
+        Employee employee1 = employees.stream()
+                .max(Comparator.comparingLong(employee -> employee.getId()))
+                .orElseThrow(EmployeeNotFoundException::new);
+        return employee1.getId()+1;
     }
 }

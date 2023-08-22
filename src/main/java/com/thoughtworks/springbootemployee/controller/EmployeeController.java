@@ -3,7 +3,6 @@ package com.thoughtworks.springbootemployee.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping(path = "/employees")
@@ -24,5 +23,10 @@ public class EmployeeController {
     @GetMapping(params = {"gender"})
     public List<Employee> findByGender (@RequestParam String gender){
         return employeeRepository.findByGender(gender);
+    }
+
+    @PostMapping(path = "/employees")
+    public Employee addEmployee(@RequestBody Employee employee){
+        return employeeRepository.addEmployee(employee);
     }
 }

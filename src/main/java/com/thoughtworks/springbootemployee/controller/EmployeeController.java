@@ -32,4 +32,13 @@ public class EmployeeController {
 
         return employeeRepository.addEmployee(employee);
     }
+
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee){
+        Employee employeeById = employeeRepository.findById(id);
+        employeeById.setAge(newEmployee.getAge());
+        employeeById.setSalary(newEmployee.getSalary());
+        return employeeById;
+    }
+
 }

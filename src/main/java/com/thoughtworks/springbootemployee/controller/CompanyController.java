@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,5 +43,15 @@ public class CompanyController {
         Company companyById = companyRepository.findById(id);
         companyById.setName(newCompany.getName());
         return companyById;
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteCompany(@PathVariable Long id){
+        Company companyById = companyRepository.findById(id);
+
+        if(companyById == null) {
+            throw new CompanyNotFoundException();
+        }
+        companyRepository.deleteCompany(companyById);
     }
 }

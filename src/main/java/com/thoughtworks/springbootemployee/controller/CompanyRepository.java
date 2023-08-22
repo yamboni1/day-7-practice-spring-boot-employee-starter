@@ -49,4 +49,8 @@ public class CompanyRepository {
                 .max()
                 .orElse(0L) + 1L;
     }
+
+    public void deleteCompany(Company company) {
+        companies.remove(company);
+    }
 }

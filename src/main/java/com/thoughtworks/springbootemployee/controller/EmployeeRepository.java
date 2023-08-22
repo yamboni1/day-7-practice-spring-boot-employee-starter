@@ -3,7 +3,6 @@ package com.thoughtworks.springbootemployee.controller;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,5 +45,9 @@ public class EmployeeRepository {
                 .mapToLong(Employee::getId)
                 .max()
                 .orElse(0L) + 1;
+    }
+
+    public void deleteEmployee(Employee employee) {
+        employees.remove(employee);
     }
 }

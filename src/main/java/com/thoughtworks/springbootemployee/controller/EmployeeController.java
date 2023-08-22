@@ -50,7 +50,10 @@ public class EmployeeController {
         }
         employeeRepository.deleteEmployee(employeeById);
     }
-
+    @GetMapping(params = {"pageNumber","pageSize"})
+    public List<Employee> listByPage(@RequestParam Long pageNumber, @RequestParam Long pageSize){
+        return employeeRepository.listByPage(pageNumber, pageSize);
+    }
 
 
 }

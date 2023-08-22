@@ -13,6 +13,8 @@ public class EmployeeRepository {
     static {
         employees.add(new Employee(1, "Daphne", 23, "Female", 1000));
         employees.add(new Employee(2, "Red", 25, "Male", 1500));
+        employees.add(new Employee(3L, "Sandra", 66, "Female", 788));
+        employees.add(new Employee(4L, "Sam", 34, "Male", 4566));
     }
 
     public List<Employee> listAll() {
@@ -49,5 +51,12 @@ public class EmployeeRepository {
 
     public void deleteEmployee(Employee employee) {
         employees.remove(employee);
+    }
+
+    public List<Employee> listByPage(Long pageNumber, Long pageSize) {
+        return employees.stream()
+                .skip((pageNumber -1)* pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
     }
 }

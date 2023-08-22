@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class CompanyRepository {
     private static final List<Company> companies = new ArrayList<>();
@@ -25,5 +27,12 @@ public class CompanyRepository {
                 .filter(company -> company.getId().equals(id))
                 .findFirst()
                 .orElseThrow(CompanyNotFoundException::new);
+    }
+
+    public List<Company> listByPage(Long pageNumber, Long pageSize) {
+        return companies.stream()
+                .skip((pageNumber-1)*pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
     }
 }

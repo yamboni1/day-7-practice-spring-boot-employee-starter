@@ -10,12 +10,16 @@ import java.util.stream.Collectors;
 public class EmployeeRepository {
     private static final List<Employee> employees = new ArrayList<>();
 
+    private static final String FEMALE = "Female";
+
+    private static final String MALE = "Male";
+
     static {
-        employees.add(new Employee(1L, "Daphne", 23, "Female", 1000, 1));
-        employees.add(new Employee(2L, "Red", 25, "Male", 1500, 1));
-        employees.add(new Employee(3L, "Sandra", 66, "Female", 788, 2));
-        employees.add(new Employee(4L, "Sam", 34, "Male", 4566, 3));
-        employees.add(new Employee(5L, "Jane", 46, "Female", 5555, 4));
+        employees.add(new Employee(1L, "Daphne", 23, FEMALE, 1000, 1));
+        employees.add(new Employee(2L, "Red", 25, MALE, 1500, 1));
+        employees.add(new Employee(3L, "Sandra", 66, FEMALE, 788, 2));
+        employees.add(new Employee(4L, "Sam", 34, MALE, 4566, 3));
+        employees.add(new Employee(5L, "Jane", 46, FEMALE, 5555, 4));
     }
 
     public List<Employee> listAll() {
@@ -63,7 +67,7 @@ public class EmployeeRepository {
 
     public List<Employee> findByCompanyId(Long employeesCompanyId) {
         return employees.stream()
-                .filter(employee -> employee.getCompanyId() == employeesCompanyId)
+                .filter(employee -> employee.getCompanyId().equals(employeesCompanyId))
                 .collect(Collectors.toList());
     }
 }

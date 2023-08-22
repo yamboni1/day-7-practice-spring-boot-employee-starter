@@ -37,9 +37,6 @@ public class Employee {
         return salary;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -49,9 +46,6 @@ public class Employee {
         this.age = age;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public void setSalary(Integer salary) {
         this.salary = salary;
@@ -59,8 +53,5 @@ public class Employee {
 
     public Long getCompanyId() {
         return companyId;
-    }
-    public void setCompanyId() {
-        this.companyId = companyId;
     }
 }

@@ -35,4 +35,18 @@ public class CompanyRepository {
                 .limit(pageSize)
                 .collect(Collectors.toList());
     }
+
+    public Company addCompany(Company company) {
+        Long companyId = generateCompanyId();
+        Company companyToBeAdded = new Company(companyId, company.getName());
+        companies.add(companyToBeAdded);
+        return companyToBeAdded;
+    }
+
+    private Long generateCompanyId() {
+        return companies.stream()
+                .mapToLong(Company::getId)
+                .max()
+                .orElse(0L) + 1L;
+    }
 }

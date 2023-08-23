@@ -13,6 +13,8 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
+    public EmployeeController(EmployeeRepository employeeRepository){this.employeeRepository = employeeRepository;}
+
     @GetMapping
     public List<Employee> listAll(){
         return employeeRepository.listAll();

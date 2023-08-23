@@ -38,8 +38,7 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee){
-        Employee employee = employeeRepository.update(id, newEmployee);
-        return employee;
+        return employeeRepository.updateEmployee(id, newEmployee);
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

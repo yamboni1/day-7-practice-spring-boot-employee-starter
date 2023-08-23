@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -30,6 +31,9 @@ public class EmployeeService {
     }
     public Employee findByEmployeeId(Long id) {
         return employeeRepository.findByEmployeeId(id);
+    }
+    public List<Employee> findByEmployeeGender(String gender) {
+        return employeeRepository.findByEmployeeGender(gender);
     }
 
 

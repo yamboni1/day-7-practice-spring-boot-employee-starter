@@ -5,9 +5,7 @@ import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +59,40 @@ public class EmployeeServiceTest {
         assertEquals("Employee must be 18~65 years old", employeeCreateException.getMessage());
 
     }
+    @Test
+    void should_return_active_employee_when_create_given_employee_service_and_employee_with_valid_age() {
+    //given
+        Employee employee = new Employee(1L,"Alice", 20, "Female", 9000, 1L);
+        Employee savedEmployee = new Employee(1L,"Alice", 20, "Female", 9000, 1L);
+        when(mockedEmployeeRepository.addEmployee(employee)).thenReturn(savedEmployee);
+
+        //when
+        Employee employeeResponse = employeeService.create(employee);
+     
+     //then
+        assertEquals(savedEmployee.getId(),employeeResponse.getId());
+        assertEquals("Alice",employeeResponse.getId());
+        assertEquals(savedEmployee.getId(),employeeResponse.getId());
+        assertEquals(20,employeeResponse.getId());
+        assertEquals("Female",employeeResponse.getId());
+        assertEquals(9000,employeeResponse.getId());
+        assertEquals(1L,employeeResponse.getId());
+        assertTrue(employeeResponse.isActive());
+    }
+
+
+
+//    @Test
+//    void should_set_active_false_employee_when_delete_given_employee_service_and_employee_id() {
+//    //given
+//        Employee employee = new Employee(1L,"Alice", 66, "Female", 9000, 1L);
+//        employee.setActive(Boolean.TRUE);
+//        when(mockedEmployeeRepository.findByEmployeeId(employee.getId())).thenReturn(employee);
+//        //when
+//        employeeService.delete(employee.getId());
+//     //then
+//        verify(mockedEmployeeRepository.update()
+//    }
 
 
 }

@@ -9,6 +9,7 @@ public class Employee {
     private final String gender;
     private Integer salary;
     private final Long companyId;
+    private Boolean isActive;
 
     public Employee(long id, String name, int age, String gender, int salary, long companyId) {
         this.id = id;
@@ -56,4 +57,14 @@ public class Employee {
     public boolean hasInvalidAge() {
         return getAge() < MIN_VALID_AGE || getAge() > MAX_VALID_AGE;
     }
+
+
+    public void setActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean isActive(){
+        return isActive;
+    }
+
 }

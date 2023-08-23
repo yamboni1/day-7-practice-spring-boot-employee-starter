@@ -15,4 +15,10 @@ public class EmployeeService {
         return employeeRepository.addEmployee(employee);
     }
 
+
+    public void delete(Long id) {
+        Employee employeeToDelete = employeeRepository.findByEmployeeId(id);
+        employeeToDelete.setActive(false);
+        employeeRepository.update(id,employeeToDelete);
+    }
 }

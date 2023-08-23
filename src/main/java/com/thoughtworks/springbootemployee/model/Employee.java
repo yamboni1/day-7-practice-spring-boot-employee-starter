@@ -30,7 +30,6 @@ public class Employee {
         this.gender = gender;
         this.salary = salary;
         this.companyId = companyId;
-
     }
 
     public Long getId() {
@@ -80,4 +79,8 @@ public class Employee {
         return isActive;
     }
 
+    public void merge(Employee employee) {
+        salary = employee.getSalary();
+        age = employee.getAge();
+    }
 }

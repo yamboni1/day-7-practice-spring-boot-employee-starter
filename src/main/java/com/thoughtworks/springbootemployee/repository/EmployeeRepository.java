@@ -78,4 +78,10 @@ public class EmployeeRepository {
 
     }
 
+    public Employee update(Long id, Employee employee) {
+        Employee employeeToUpdate = findByEmployeeId(id);
+        employeeToUpdate.merge(employee);
+        return employeeToUpdate;
+
+    }
 }

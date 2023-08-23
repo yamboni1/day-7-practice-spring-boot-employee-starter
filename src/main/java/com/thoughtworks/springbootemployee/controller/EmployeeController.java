@@ -23,7 +23,7 @@ public class EmployeeController {
 
     @GetMapping
     public List<Employee> listAll(){
-        return employeeRepository.listAllEmployees();
+        return employeeService.listAllEmployees();
     }
 
     @GetMapping(path = "/{id}")

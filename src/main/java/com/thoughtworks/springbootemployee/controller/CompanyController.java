@@ -44,7 +44,7 @@ public class CompanyController {
     }
     @PostMapping
     public Company addCompany(@RequestBody Company company){
-        return companyRepository.addCompany(company);
+        return companyService.addCompany(company);
     }
     @PutMapping("/{id}")
     public Company updateCompany(@PathVariable Long id, @RequestBody Company newCompany){

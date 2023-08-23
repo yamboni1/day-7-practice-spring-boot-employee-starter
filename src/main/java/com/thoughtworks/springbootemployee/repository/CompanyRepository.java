@@ -55,6 +55,12 @@ public class CompanyRepository {
                 .max()
                 .orElse(EMPTY) + INCREMENT;
     }
+    public Company updateCompany(Long id, Company updateCompany){
+        Company company = this.findByCompanyId(id);
+        updateCompany.setName(company.getName());
+        return company;
+
+    }
 
     public void deleteCompany(Company company) {
         companies.remove(company);

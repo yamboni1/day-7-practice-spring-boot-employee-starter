@@ -40,7 +40,7 @@ public class CompanyController {
     @GetMapping(params = {"pageNumber","pageSize"})
     @ResponseStatus(value = HttpStatus.CREATED)
     public List<Company> listByPage(@RequestParam Long pageNumber, @RequestParam Long pageSize){
-        return companyRepository.listByPage(pageNumber, pageSize);
+        return companyService.listByPage(pageNumber, pageSize);
     }
     @PostMapping
     public Company addCompany(@RequestBody Company company){

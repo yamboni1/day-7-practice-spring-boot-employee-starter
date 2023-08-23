@@ -6,6 +6,7 @@ import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyService {
@@ -19,5 +20,8 @@ public class CompanyService {
     }
     public Company findByCompanyId(Long id) {
         return companyRepository.findByCompanyId(id);
+    }
+    public List<Company> listByPage(Long pageNumber, Long pageSize) {
+        return companyRepository.listByPage(pageNumber,pageSize);
     }
 }

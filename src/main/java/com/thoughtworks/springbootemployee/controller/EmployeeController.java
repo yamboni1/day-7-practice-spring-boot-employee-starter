@@ -28,7 +28,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/{id}")
     public Employee findById(@PathVariable Long id) {
-        return employeeRepository.findByEmployeeId(id);
+        return employeeService.findByEmployeeId(id);
     }
 
     @GetMapping(params = {"gender"})

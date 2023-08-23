@@ -28,6 +28,9 @@ public class EmployeeService {
     public List<Employee> listAllEmployees() {
         return employeeRepository.listAllEmployees();
     }
+    public Employee findByEmployeeId(Long id) {
+        return employeeRepository.findByEmployeeId(id);
+    }
 
 
     public void delete(Long id) {

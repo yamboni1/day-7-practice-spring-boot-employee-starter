@@ -53,10 +53,6 @@ public class CompanyController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteCompany(@PathVariable Long id){
         Company companyById = companyRepository.findById(id);
-
-        if(companyById == null) {
-            throw new CompanyNotFoundException();
-        }
         companyRepository.deleteCompany(companyById);
     }
 }

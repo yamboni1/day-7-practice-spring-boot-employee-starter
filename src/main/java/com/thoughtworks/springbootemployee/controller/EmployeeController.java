@@ -47,10 +47,6 @@ public class EmployeeController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Long id){
         Employee employeeById = employeeRepository.findById(id);
-
-        if(employeeById == null) {
-            throw new EmployeeNotFoundException();
-        }
         employeeRepository.deleteEmployee(employeeById);
     }
     @GetMapping(params = {"pageNumber","pageSize"})

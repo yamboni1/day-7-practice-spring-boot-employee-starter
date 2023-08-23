@@ -128,9 +128,8 @@ class EmployeeServiceTest {
         Employee employee = new Employee(1L, "Alice", 18, "Female", 9000, 1L, true);
         Employee employee2 = new Employee(1L, "Alice", 18, "Female", 90000, 1L, false);
         //when
-        EmployeeInactiveStatusException employeeInactiveStatusException = assertThrows(EmployeeInactiveStatusException.class, () -> {
-            employeeService.update(employee.getId(), employee2);
-        });
+        EmployeeInactiveStatusException employeeInactiveStatusException = assertThrows
+                (EmployeeInactiveStatusException.class, () -> employeeService.update(employee.getId(), employee2));
         assertEquals("Employee is inactive", employeeInactiveStatusException.getMessage());
 
     }

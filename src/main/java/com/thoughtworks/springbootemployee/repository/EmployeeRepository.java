@@ -24,32 +24,32 @@ public class EmployeeRepository {
         employees.add(new Employee(5L, "Jane", 46, FEMALE, 5555, 4));
     }
 
-    public List<Employee> listAll() {
+    public List<Employee> listAllEmployees() {
         return employees;
     }
 
-    public Employee findById(Long id) {
+    public Employee findByEmployeeId(Long id) {
         return employees.stream()
                 .filter(employee -> employee.getId().equals(id))
                 .findFirst()
                 .orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public List<Employee> findByGender(String gender) {
+    public List<Employee> findByEmployeeGender(String gender) {
         return employees.stream()
-                .filter(employee -> employee.getGender().equals(gender))
+                .filter(employee -> employee.getGender().equalsIgnoreCase(gender))
                 .collect(Collectors.toList());
     }
 
     public Employee addEmployee(Employee employee) {
-        Long generatedId = generateId();
+        Long generatedId = generateEmployeeId();
         Employee toBeAddedEmployee = new Employee(generatedId, employee.getName(), employee.getAge(), employee.getGender(), employee.getSalary(),employee.getCompanyId());
         employees.add(toBeAddedEmployee);
         return toBeAddedEmployee;
 
     }
 
-    public Long generateId() {
+    public Long generateEmployeeId() {
         return employees.stream()
                 .mapToLong(Employee::getId)
                 .max()

@@ -17,17 +17,17 @@ public class EmployeeController {
 
     @GetMapping
     public List<Employee> listAll(){
-        return employeeRepository.listAll();
+        return employeeRepository.listAllEmployees();
     }
 
     @GetMapping(path = "/{id}")
     public Employee findById(@PathVariable Long id) {
-        return employeeRepository.findById(id);
+        return employeeRepository.findByEmployeeId(id);
     }
 
     @GetMapping(params = {"gender"})
     public List<Employee> findByGender (@RequestParam String gender){
-        return employeeRepository.findByGender(gender);
+        return employeeRepository.findByEmployeeGender(gender);
     }
 
     @PostMapping()
@@ -38,7 +38,7 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee newEmployee){
-        Employee employeeById = employeeRepository.findById(id);
+        Employee employeeById = employeeRepository.findByEmployeeId(id);
         employeeById.setAge(newEmployee.getAge());
         employeeById.setSalary(newEmployee.getSalary());
         return employeeById;
@@ -46,7 +46,7 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable Long id){
-        Employee employeeById = employeeRepository.findById(id);
+        Employee employeeById = employeeRepository.findByEmployeeId(id);
         employeeRepository.deleteEmployee(employeeById);
     }
     @GetMapping(params = {"pageNumber","pageSize"})

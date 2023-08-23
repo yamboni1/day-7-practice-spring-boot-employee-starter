@@ -27,7 +27,7 @@ public class CompanyRepository {
         return companies;
     }
 
-    public Company findById(Long id) {
+    public Company findByCompanyId(Long id) {
         return companies.stream()
                 .filter(company -> company.getId().equals(id))
                 .findFirst()

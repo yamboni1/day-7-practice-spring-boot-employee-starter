@@ -81,8 +81,7 @@ class EmployeeServiceTest {
         assertEquals(1L, employeeResponse.getCompanyId());
         assertTrue(employeeResponse.isActive());
     }
-
-
+    
     @Test
     void should_set_active_false_employee_when_delete_given_employee_service_and_employee_id() {
         //given
@@ -92,12 +91,32 @@ class EmployeeServiceTest {
         //when
         employeeService.delete(employee.getId());
         //then
-        verify(mockedEmployeeRepository).update(eq(employee.getId()), argThat(tempEmployee -> {
+        verify(mockedEmployeeRepository).updateEmployee(eq(employee.getId()), argThat(tempEmployee -> {
             assertFalse(tempEmployee.isActive());
             assertEquals("Alice", tempEmployee.getName());
             assertEquals(20, tempEmployee.getAge());
             assertEquals("Female", tempEmployee.getGender());
             assertEquals(9000, tempEmployee.getSalary());
+            assertEquals(1L, tempEmployee.getCompanyId());
+            return true;
+        }));
+    }
+    @Test
+    void should_return_updated_employee_when_update_given_employee_service_and_employee_isActive() {
+
+        Employee employee = new Employee(1L, "Alice", 24, "Female", 9000, 1L, true);
+        employee.setAge(42);
+        employee.setSalary(90000);
+        when(mockedEmployeeRepository.addEmployee(employee)).thenReturn(employee);
+        //when
+        employeeService.update(employee.getId(),employee);
+        //then
+        verify(mockedEmployeeRepository).updateEmployee(eq(employee.getId()), argThat(tempEmployee -> {
+            assertTrue(tempEmployee.isActive());
+            assertEquals("Alice", tempEmployee.getName());
+            assertEquals(42, tempEmployee.getAge());
+            assertEquals("Female", tempEmployee.getGender());
+            assertEquals(90000, tempEmployee.getSalary());
             assertEquals(1L, tempEmployee.getCompanyId());
             return true;
         }));

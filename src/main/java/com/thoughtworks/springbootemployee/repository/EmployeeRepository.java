@@ -17,11 +17,11 @@ public class EmployeeRepository {
     private static final String MALE = "Male";
 
     static {
-        employees.add(new Employee(1L, "Daphne", 23, FEMALE, 1000, 1));
-        employees.add(new Employee(2L, "Red", 25, MALE, 1500, 1));
-        employees.add(new Employee(3L, "Sandra", 66, FEMALE, 788, 2));
-        employees.add(new Employee(4L, "Sam", 34, MALE, 4566, 3));
-        employees.add(new Employee(5L, "Jane", 46, FEMALE, 5555, 4));
+        employees.add(new Employee(1L, "Col", 23, FEMALE, 1000, 1, true));
+        employees.add(new Employee(2L, "Red", 25, MALE, 1500, 1, true));
+        employees.add(new Employee(3L, "Sandra", 66, FEMALE, 788, 2, true));
+        employees.add(new Employee(4L, "Sam", 34, MALE, 4566, 3, true));
+        employees.add(new Employee(5L, "Jane", 46, FEMALE, 5555, 4, true));
     }
 
     public List<Employee> listAllEmployees() {
@@ -43,7 +43,7 @@ public class EmployeeRepository {
 
     public Employee addEmployee(Employee employee) {
         Long generatedId = generateEmployeeId();
-        Employee toBeAddedEmployee = new Employee(generatedId, employee.getName(), employee.getAge(), employee.getGender(), employee.getSalary(),employee.getCompanyId());
+        Employee toBeAddedEmployee = new Employee(generatedId, employee.getName(), employee.getAge(), employee.getGender(), employee.getSalary(),employee.getCompanyId(), employee.isActive());
         employees.add(toBeAddedEmployee);
         return toBeAddedEmployee;
 

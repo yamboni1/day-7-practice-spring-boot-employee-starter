@@ -37,7 +37,7 @@ class EmployeeApiTests {
     void should_return_all_given_all_employees_when_perform_get_employees() throws Exception {
 
         //given
-        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
+        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
 
         //when, then
 

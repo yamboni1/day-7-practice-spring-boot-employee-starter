@@ -11,8 +11,12 @@ import java.util.stream.Collectors;
 @Repository
 public class CompanyRepository {
     private static final List<Company> companies = new ArrayList<>();
+    private static final long EMPTY = 0L;
+
+    private static final long INCREMENT = 1L;
+
     static{
-        companies.add(new Company(1L, "Spring"));
+        companies.add(new Company(INCREMENT, "Spring"));
         companies.add(new Company(2L, "OOCL"));
         companies.add(new Company(3L, "Google"));
         companies.add(new Company(4L, "COSCO"));
@@ -49,7 +53,7 @@ public class CompanyRepository {
         return companies.stream()
                 .mapToLong(Company::getId)
                 .max()
-                .orElse(0L) + 1L;
+                .orElse(EMPTY) + INCREMENT;
     }
 
     public void deleteCompany(Company company) {

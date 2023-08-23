@@ -61,6 +61,14 @@ class EmployeeApiTests {
                 .andExpect(jsonPath("$.salary").value(alice.getSalary()))
                 .andExpect(jsonPath("$.companyId").value(alice.getCompanyId()));
     }
+    @Test
+    void should_return_404_not_found_when_perform_get_employee_given_do_not_exist() throws Exception {
+    //given
+     long doesNotExistEmployeeId = 99L;
+     //when
+     mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/"+ doesNotExistEmployeeId))
+             .andExpect(status().isNotFound());
 
-
+     //then
+    }
 }

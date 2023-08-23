@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,13 @@ import java.util.List;
 @RestController
 public class EmployeeController {
     @Autowired
-    private EmployeeRepository employeeRepository;
-    public EmployeeController(EmployeeRepository employeeRepository){this.employeeRepository = employeeRepository;}
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService,EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+        this.employeeService = employeeService;
+    }
 
     @GetMapping
     public List<Employee> listAll(){
@@ -33,7 +39,7 @@ public class EmployeeController {
     @PostMapping()
     @ResponseStatus(value = HttpStatus.CREATED)
     public Employee addEmployee(@RequestBody Employee employee){
-        return employeeRepository.addEmployee(employee);
+        return employeeService.create(employee);
     }
 
     @PutMapping("/{id}")

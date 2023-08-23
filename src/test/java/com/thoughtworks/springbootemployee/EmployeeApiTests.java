@@ -55,8 +55,8 @@ class EmployeeApiTests {
     @Test
     void should_return_the_employee_when_get_employee_given_employee_Id() throws Exception {
     //given
-        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
-        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L));
+        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
+        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L, true));
 
      //when,then
         mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/"+alice.getId()))
@@ -79,8 +79,8 @@ class EmployeeApiTests {
     @Test
     void should_return_employees_by_gender_when_perform_get_employee_given_gender() throws Exception {
     //given
-        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
-        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L));
+        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
+        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L, true));
      //when
         mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/").param("gender", "Female"))
                 .andExpect(status().isOk())
@@ -95,7 +95,7 @@ class EmployeeApiTests {
     @Test
     void should_return_the_employee_when_perform_post_employees_given_a_new_employee_with_JSON_format() throws Exception {
     //given
-        Employee newEmployee = new Employee(1L,"Alice", 24, "Female", 9000, 1L);
+        Employee newEmployee = new Employee(1L,"Alice", 24, "Female", 9000, 1L, true);
 
         //when
         mockMvcClient.perform(MockMvcRequestBuilders.post("/employees")
@@ -114,7 +114,7 @@ class EmployeeApiTests {
     @Test
     void should_return_updated_employee_when_perform_put_given_employee_age_and_salary() throws Exception {
     //given
-        Employee newEmployee =employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
+        Employee newEmployee =employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
         newEmployee.setAge(40);
         newEmployee.setSalary(12000);
 
@@ -130,7 +130,7 @@ class EmployeeApiTests {
     @Test
     void should_return_deleted_employee_when_perform_delete_given_employee_id() throws Exception {
     //given
-        Employee newEmployee =employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
+        Employee newEmployee =employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
 
         //when
         mockMvcClient.perform(MockMvcRequestBuilders.delete("/employees/"+newEmployee.getId()))
@@ -145,8 +145,8 @@ class EmployeeApiTests {
     //given
         Long pageNumber = 1L;
         Long pageSize = 2L;
-        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
-        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L));
+        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
+        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L, true));
         MultiValueMap<String,String> paramsMap = new LinkedMultiValueMap<>();
         paramsMap.add("pageNumber", pageNumber.toString());
         paramsMap.add("pageSize", pageSize.toString());

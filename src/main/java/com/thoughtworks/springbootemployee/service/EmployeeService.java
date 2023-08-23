@@ -6,6 +6,7 @@ import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -36,10 +37,12 @@ public class EmployeeService {
         return employeeRepository.findByEmployeeGender(gender);
     }
 
-
     public void delete(Long id) {
         Employee employeeToDelete = employeeRepository.findByEmployeeId(id);
         employeeToDelete.setActive(false);
         employeeRepository.updateEmployee(id,employeeToDelete);
+    }
+    public List<Employee> listByPage(Long pageNumber, Long pageSize) {
+        return employeeRepository.listByPage(pageNumber,pageSize);
     }
 }

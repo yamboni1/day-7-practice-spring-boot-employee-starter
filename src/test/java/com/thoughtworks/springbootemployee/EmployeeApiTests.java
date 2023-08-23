@@ -123,6 +123,16 @@ class EmployeeApiTests {
                 .andExpect(jsonPath("$.age").value(40))
                 .andExpect(jsonPath("$.salary").value(12000));
 
+    }
+    @Test
+    void should_return_deleted_employee_when_perform_delete_given_employee_id() throws Exception {
+    //given
+        Employee newEmployee =employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
+
+        //when
+        mockMvcClient.perform(MockMvcRequestBuilders.delete("/employees/"+newEmployee.getId()))
+                .andExpect(status().isNoContent());
+
 
      //then
     }

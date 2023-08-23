@@ -24,6 +24,7 @@ public class EmployeeRepository {
         employees.add(new Employee(5L, "Jane", 46, FEMALE, 5555, 4));
     }
 
+    //TODO: methods can be renamed to meaningful names
     public List<Employee> listAll() {
         return employees;
     }
@@ -35,7 +36,7 @@ public class EmployeeRepository {
                 .orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public List<Employee> findByGender(String gender) {
+    public List<Employee> findByGender(String gender) { //TODO: can use equalsIgnoreCase here
         return employees.stream()
                 .filter(employee -> employee.getGender().equals(gender))
                 .collect(Collectors.toList());

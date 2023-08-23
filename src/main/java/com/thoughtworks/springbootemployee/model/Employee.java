@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.model;
 
-public class Employee {
+//TODO: remove extra line spaces
+public class Employee { //TODO: can rename variable names to meaningful names
     private final Long id;
     private final String name;
     private Integer age;

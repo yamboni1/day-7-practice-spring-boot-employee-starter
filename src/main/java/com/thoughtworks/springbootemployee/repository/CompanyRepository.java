@@ -22,6 +22,7 @@ public class CompanyRepository {
         companies.add(new Company(5L, "ITA"));
     }
 
+    //TODO: methods can be renamed to meaningful names
 
     public List<Company> listAllCompanies() {
         return companies;

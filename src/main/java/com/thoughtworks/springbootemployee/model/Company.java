@@ -1,6 +1,6 @@
 package com.thoughtworks.springbootemployee.model;
 
-public class Company {
+public class Company { //TODO: can rename variable names to meaningful names
     private final Long id;
     private String name;
 

@@ -1,4 +1,5 @@
 package com.thoughtworks.springbootemployee;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,9 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -69,8 +72,6 @@ class EmployeeApiTests {
      //when
      mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/"+ doesNotExistEmployeeId))
              .andExpect(status().isNotFound());
-
-     //then
     }
     @Test
     void should_return_employees_by_gender_when_perform_get_employee_given_gender() throws Exception {
@@ -87,6 +88,32 @@ class EmployeeApiTests {
                 .andExpect(jsonPath("$[0].gender").value(alice.getGender()))
                 .andExpect(jsonPath("$[0].salary").value(alice.getSalary()))
                 .andExpect(jsonPath("$[0].companyId").value(alice.getCompanyId()));
+    }
+    @Test
+    void should_return_the_employee_when_perform_post_employees_given_a_new_employee_with_JSON_format() throws Exception {
+    //given
+        Employee newEmployee = new Employee(1L,"Alice", 24, "Female", 9000, 1L);
+
+        //when
+        mockMvcClient.perform(MockMvcRequestBuilders.post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsBytes(newEmployee)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(notNullValue()))
+                .andExpect(jsonPath("$.name").value("Alice"))
+                .andExpect(jsonPath("$.age").value("24"))
+                .andExpect(jsonPath("$.gender").value("Female"))
+                .andExpect(jsonPath("$.salary").value(9000))
+                .andExpect(jsonPath("$.companyId").value(1L));
+
+    }
+
+    @Test
+    void should_return_updated_employee_when_perform_put_given_employee_age_and() {
+    //given
+
+     //when
+
      //then
     }
 }

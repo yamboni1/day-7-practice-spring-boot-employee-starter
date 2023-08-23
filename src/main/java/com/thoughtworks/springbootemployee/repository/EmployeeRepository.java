@@ -78,10 +78,11 @@ public class EmployeeRepository {
 
     }
 
-    public Employee update(Long id, Employee employee) {
-        Employee employeeToUpdate = findByEmployeeId(id);
-        employeeToUpdate.merge(employee);
-        return employeeToUpdate;
+    public Employee updateEmployee(Long id, Employee updateEmployee) {
+        Employee employee = this.findByEmployeeId(id);
+        updateEmployee.setAge(employee.getAge());
+        updateEmployee.setSalary(updateEmployee.getSalary());
+        return employee;
 
     }
 }

@@ -34,6 +34,7 @@ public class CompanyController {
         return employeeRepository.findByCompanyId(employeesCompanyId);
     }
     @GetMapping(params = {"pageNumber","pageSize"})
+    @ResponseStatus(value = HttpStatus.CREATED)
     public List<Company> listByPage(@RequestParam Long pageNumber, @RequestParam Long pageSize){
         return companyRepository.listByPage(pageNumber, pageSize);
     }

@@ -109,10 +109,20 @@ class EmployeeApiTests {
     }
 
     @Test
-    void should_return_updated_employee_when_perform_put_given_employee_age_and() {
+    void should_return_updated_employee_when_perform_put_given_employee_age_and_salary() throws Exception {
     //given
+        Employee newEmployee =employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
+        newEmployee.setAge(40);
+        newEmployee.setSalary(12000);
 
      //when
+        mockMvcClient.perform(MockMvcRequestBuilders.put("/employees/"+newEmployee.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsBytes(newEmployee)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.age").value(40))
+                .andExpect(jsonPath("$.salary").value(12000));
+
 
      //then
     }

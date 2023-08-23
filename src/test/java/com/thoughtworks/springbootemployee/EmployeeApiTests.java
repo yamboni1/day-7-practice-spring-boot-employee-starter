@@ -54,6 +54,7 @@ class EmployeeApiTests {
 
      //when,then
         mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/"+alice.getId()))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value(alice.getName()))
                 .andExpect(jsonPath("$.id").value(alice.getId()))
                 .andExpect(jsonPath("$.age").value(alice.getAge()))
@@ -69,6 +70,23 @@ class EmployeeApiTests {
      mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/"+ doesNotExistEmployeeId))
              .andExpect(status().isNotFound());
 
+     //then
+    }
+    @Test
+    void should_return_employees_by_gender_when_perform_get_employee_given_gender() throws Exception {
+    //given
+        Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L));
+        Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L));
+     //when
+        mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/").param("gender", "Female"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id").value(alice.getId()))
+                .andExpect(jsonPath("$[0].name").value(alice.getName()))
+                .andExpect(jsonPath("$[0].age").value(alice.getAge()))
+                .andExpect(jsonPath("$[0].gender").value(alice.getGender()))
+                .andExpect(jsonPath("$[0].salary").value(alice.getSalary()))
+                .andExpect(jsonPath("$[0].companyId").value(alice.getCompanyId()));
      //then
     }
 }

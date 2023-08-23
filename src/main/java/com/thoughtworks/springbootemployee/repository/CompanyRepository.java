@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class CompanyRepository {
     private static final List<Company> companies = new ArrayList<>();
     private static final long EMPTY = 0L;
-
     private static final long INCREMENT = 1L;
 
     static{
@@ -36,8 +35,9 @@ public class CompanyRepository {
     }
 
     public List<Company> listByPage(Long pageNumber, Long pageSize) {
+        long pageDisplay = (pageNumber - 1) * pageSize;
         return companies.stream()
-                .skip((pageNumber-1)*pageSize)
+                .skip(pageDisplay)
                 .limit(pageSize)
                 .collect(Collectors.toList());
     }

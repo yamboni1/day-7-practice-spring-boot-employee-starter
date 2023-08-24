@@ -57,7 +57,7 @@ class EmployeeApiTests {
     //given
         Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
         Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L, true));
-
+    //TODO can remove bob as it is unused
      //when,then
         mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/"+alice.getId()))
                 .andExpect(status().isOk())
@@ -81,7 +81,7 @@ class EmployeeApiTests {
     //given
         Employee alice = employeeRepository.addEmployee(new Employee(1L,"Alice", 24, "Female", 9000, 1L, true));
         Employee bob = employeeRepository.addEmployee(new Employee(2L,"Bob", 24, "Male", 9000, 2L, true));
-     //when
+     //when //TODO can remove bob as it is unused
         mockMvcClient.perform(MockMvcRequestBuilders.get("/employees/").param("gender", "Female"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -166,4 +166,4 @@ class EmployeeApiTests {
 
      //then
     }
-}
+} //TODO there is no CompanyAPITest?

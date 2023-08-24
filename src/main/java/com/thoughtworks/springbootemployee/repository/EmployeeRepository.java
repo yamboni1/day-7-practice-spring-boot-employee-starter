@@ -57,7 +57,7 @@ public class EmployeeRepository {
     }
 
     public void deleteEmployee(Employee employee) {
-        employees.remove(employee);
+        employees.remove(employee); //TODO question about this
     }
 
     public List<Employee> listByPage(Long pageNumber, Long pageSize) {

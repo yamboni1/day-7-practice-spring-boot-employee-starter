@@ -50,7 +50,7 @@ public class EmployeeController {
         if(employeeById == null){
             throw new EmployeeNotFoundException();
         }
-        employeeService.delete(employeeById.getId());
+        employeeService.delete(employeeById.getId()); //TODO ask question
     }
     @GetMapping(params = {"pageNumber","pageSize"})
     public List<Employee> listByPage(@RequestParam Long pageNumber, @RequestParam Long pageSize) {

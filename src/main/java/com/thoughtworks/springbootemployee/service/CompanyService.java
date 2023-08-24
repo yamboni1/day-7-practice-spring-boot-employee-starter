@@ -17,7 +17,7 @@ public class CompanyService {
         return companyRepository.listAllCompanies();
     }
     public Company findByCompanyId(Long id) {
-        return companyRepository.findByCompanyId(id);
+        return companyRepository.findByCompanyId(id); //TODO I think this should be return in employeeRepository
     }
     public List<Company> listByPage(Long pageNumber, Long pageSize) {
         return companyRepository.listByPage(pageNumber,pageSize);
